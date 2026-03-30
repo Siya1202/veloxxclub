@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './Login.css'
-import veloxxLogo from './assets/veloxx_posters.png'
+import veloxxLogo from './assets/Veloxxclub Logo Blue.png'
 import loginBackground from './assets/WhatsApp Image 2026-03-25 at 12.43.06.jpeg'
 import { admins } from './data/mockDatabase.js'
 
@@ -24,23 +24,21 @@ export default function Login({ onLogin }) {
   return (
     <div
       className="login-bg"
-      style={{ backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.58)), url(${loginBackground})` }}
+      style={{ '--login-bg-image': `url(${loginBackground})` }}
     >
-      <div className="login-card">
-
+      <div className="login-layout">
         <div className="login-logo">
-          <img src={veloxxLogo} alt="VeloxxClub" className="logo-image" />
+          <img src={veloxxLogo} alt="VeloxxClub" className="logo-image logo-image--animated" />
         </div>
 
-        <p className="login-tagline">Admin Login</p>
-
-        <form onSubmit={handleSubmit}  className="login-form">
+        <div className="login-panel">
+          <p className="login-title">login</p>
+          <form onSubmit={handleSubmit} className="login-form">
           <div className="field">
             <label htmlFor="email">Email</label>
             <input
               id="email"
               type="email"
-              placeholder="your@email.com"
               value={email}
               onChange={e => { setEmail(e.target.value); setError('') }}
               required
@@ -52,7 +50,6 @@ export default function Login({ onLogin }) {
             <input
               id="password"
               type="password"
-              placeholder="••••••••"
               value={password}
               onChange={e => { setPassword(e.target.value); setError('') }}
               required
@@ -62,8 +59,8 @@ export default function Login({ onLogin }) {
           {error && <p className="login-error">{error}</p>}
 
           <button type="submit" className="login-btn">Log In</button>
-        </form>
-
+          </form>
+        </div>
       </div>
     </div>
   )
