@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Login from './Login.jsx'
+import PostLoginLanding from './PostLoginLanding.jsx'
 import Navbar from './components/Navbar.jsx'
 import Members from './Members.jsx'
 import Events from './Events.jsx'
@@ -14,9 +15,29 @@ function App() {
   const [currentAdmin, setCurrentAdmin] = useState(null)
   const [activeTab, setActiveTab] = useState('members')
   const [isNavbarCollapsed, setIsNavbarCollapsed] = useState(false)
+  const [hasSelectedDashboardPage, setHasSelectedDashboardPage] = useState(false)
 
   if (!currentAdmin) {
-    return <Login onLogin={setCurrentAdmin} />
+    return (
+      <Login
+        onLogin={(admin) => {
+          setCurrentAdmin(admin)
+          setHasSelectedDashboardPage(false)
+          setActiveTab('members')
+        }}
+      />
+    )
+  }
+
+  if (!hasSelectedDashboardPage) {
+    return (
+      <PostLoginLanding
+        onSelectPage={(nextTab) => {
+          setActiveTab(nextTab)
+          setHasSelectedDashboardPage(true)
+        }}
+      />
+    )
   }
 
   const ActivePage = pageComponents[activeTab] ?? Members
@@ -26,7 +47,11 @@ function App() {
       <Navbar
         activeTab={activeTab}
         onTabChange={setActiveTab}
-        onLogout={() => setCurrentAdmin(null)}
+        onLogout={() => {
+          setCurrentAdmin(null)
+          setHasSelectedDashboardPage(false)
+          setActiveTab('members')
+        }}
         currentAdmin={currentAdmin}
         isCollapsed={isNavbarCollapsed}
         onToggleCollapse={() => setIsNavbarCollapsed((currentValue) => !currentValue)}

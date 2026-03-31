@@ -1,0 +1,152 @@
+.post-login {
+  min-height: 100vh;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+    var(--post-login-bg-image);
+  background-position: center;
+  background-repeat: repeat;
+  background-size: auto, 280px auto;
+}
+
+.post-login__content {
+  width: min(100%, 760px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #416fd4;
+  transform: translateY(-112px);
+}
+
+.post-login__logo {
+  width: min(100%, 720px);
+  height: auto;
+  display: block;
+}
+
+.post-login__logo--animated {
+  transform: translateX(100vw);
+  animation: post-login-logo-slide 1s ease-out forwards;
+}
+
+.post-login__prompt {
+  min-height: 38px;
+  margin: 64px 0 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  color: #416fd4;
+}
+
+.post-login__cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: post-login-cursor-blink 1s steps(1) infinite;
+}
+
+.post-login__actions {
+  display: flex;
+  gap: 36px;
+  margin-top: 72px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.post-login__actions--visible {
+  animation: post-login-actions-reveal 0.35s ease-out forwards;
+  pointer-events: auto;
+}
+
+.post-login__button {
+  min-width: 152px;
+  padding: 10px 22px;
+  border: 2px solid #416fd4;
+  background: #ffffff;
+  color: #416fd4;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #416fd4;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.post-login__button:hover {
+  transform: translateY(-1px);
+}
+
+.post-login__button:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #416fd4;
+}
+
+@keyframes post-login-logo-slide {
+  from {
+    transform: translateX(100vw);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes post-login-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes post-login-actions-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 560px) {
+  .post-login {
+    padding: 20px;
+    background-size: auto, 200px auto;
+  }
+
+  .post-login__logo {
+    width: min(100%, 340px);
+  }
+
+  .post-login__prompt {
+    min-height: 56px;
+    margin-top: 48px;
+    font-size: 20px;
+  }
+
+  .post-login__content {
+    transform: translateY(-56px);
+  }
+
+  .post-login__actions {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .post-login__button {
+    width: 100%;
+  }
+}
